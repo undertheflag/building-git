@@ -1,2 +1,2 @@
 # building-git
-learning git by building git
+> learning git by building git
