@@ -1,10 +1,10 @@
-# frozen_string_literal: true
-
 require 'fileutils'
 require 'pathname'
-require '../bin/Workspace'
-require '../bin/Database'
-require '../bin/Blob'
+require '../bin/workspace'
+require '../bin/blob'
+require '../bin/database'
+require '../bin/entry'
+require '../bin/tree'
 
 command = ARGV.shift
 
@@ -34,12 +34,19 @@ when 'commit'
 
   workspace = Workspace.new(root_path)
   database = Database.new(db_path)
-  workspace.list_files.each do |path|
+  entries = workspace.list_files.map do |path|
     data = workspace.read_file(path)
     blob = Blob.new(data)
 
     database.store(blob)
+
+    Entry.new(path, blob.oid)
   end
+
+  tree = Tree.new(entries)
+  database.store(tree)
+
+  puts "tree: #{tree.oid}"
 else
   warn "jit: '#{command}' is not a jit command"
 end
