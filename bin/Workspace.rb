@@ -8,4 +8,8 @@ class Workspace
   def list_files
     Dir.entries(@pathname) - IGNORE
   end
+
+  def read_file(path)
+    File.read(@pathname.join(path))
+  end
 end
