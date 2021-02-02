@@ -7,6 +7,7 @@ require '../bin/entry'
 require '../bin/tree'
 require '../bin/author'
 require '../bin/commit'
+require '../bin/refs'
 
 command = ARGV.shift
 

@@ -1,5 +1,6 @@
 require 'zlib'
 require 'digest'
+require 'errno'
 
 class Database
   TEMP_CHARS = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
@@ -20,6 +21,9 @@ class Database
 
   def write_object(oid, content)
     object_path = @pathname.join(oid[0..1], oid[2..-1])
+    # save writing the existing objects
+    return if File.exist?(object_path)
+
     dirname = object_path.dirname
     temp_path = dirname.join(generate_temp_name)
 
