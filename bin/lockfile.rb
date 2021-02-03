@@ -1,5 +1,4 @@
 require 'fileutils'
-require 'errno'
 
 class Lockfile
   MissingParent = Class.new(StandardError)
@@ -15,6 +14,16 @@ class Lockfile
 
   def hold_for_update
     unless @lock
+      # magic here, don't use File.exist? checking
+      # two processes may both running File.exist?
+      # concurrently, then both go ahead.
+      #
+      # if File.exist?(@lock_path)
+      #   return false
+      # else
+      #   @lock = File.open(@lock_path)
+      #   return true
+      # end
       flags = File::RDWR | File::CREAT | File::EXCL
       @lock = File.open(@lock_path, flags)
     end

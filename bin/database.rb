@@ -1,6 +1,5 @@
 require 'zlib'
 require 'digest'
-require 'errno'
 
 class Database
   TEMP_CHARS = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
