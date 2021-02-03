@@ -14,7 +14,7 @@ class Tree
 
   def to_s
     entries = @entries.sort_by(&:name).map do |entry|
-      ["#{MODE} #{entry.name}", entry.oid].pack(ENTRY_FORMAT)
+      ["#{entry.mode} #{entry.name}", entry.oid].pack(ENTRY_FORMAT)
     end
 
     entries.join("")

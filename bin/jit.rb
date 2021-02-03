@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'fileutils'
 require 'pathname'
 require '../bin/workspace'
@@ -45,7 +46,8 @@ when 'commit'
 
     database.store(blob)
 
-    Entry.new(path, blob.oid)
+    stat = workspace.stat_file(path)
+    Entry.new(path, blob.oid, stat)
   end
 
   tree = Tree.new(entries)
