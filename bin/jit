@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 require 'pathname'
-require '../bin/workspace'
-require '../bin/blob'
-require '../bin/database'
-require '../bin/entry'
-require '../bin/tree'
-require '../bin/author'
-require '../bin/commit'
-require '../bin/refs'
+require '../workspace'
+require '../blob'
+require '../database'
+require '../entry'
+require '../tree'
+require '../author'
+require '../commit'
+require '../refs'
 
 command = ARGV.shift
 
