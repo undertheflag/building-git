@@ -5,8 +5,20 @@ class Workspace
     @pathname = pathname
   end
 
-  def list_files
-    Dir.entries(@pathname) - IGNORE
+  # read the filesystem recursively
+  def list_files(dir = @pathname)
+    filenames = Dir.entries(@pathname) - IGNORE
+
+    filenames.flat_map do |name|
+      path = dir.join(name)
+
+      if File.directory?(path)
+        list_files(path)
+      else
+        path.relative_path_from(@pathname)
+      end
+    end
+
   end
 
   def read_file(path)

@@ -50,8 +50,13 @@ when 'commit'
     Entry.new(path, blob.oid, stat)
   end
 
+  root = Tree.build(entries)
+  root.traverse{|tree| database.store(tree)}
+
+=begin
   tree = Tree.new(entries)
   database.store(tree)
+=end
 
   parent = refs.read_head
   name = ENV.fetch("GIT_AUTHOR_NAME")
