@@ -1,5 +1,5 @@
 class Workspace
-  IGNORE = %w[. .. .git].freeze
+  IGNORE = ['.', '..', '.git']
 
   def initialize(pathname)
     @pathname = pathname
@@ -7,7 +7,7 @@ class Workspace
 
   # read the filesystem recursively
   def list_files(dir = @pathname)
-    filenames = Dir.entries(@pathname) - IGNORE
+    filenames = Dir.entries(dir) - IGNORE # dir not @pathname
 
     filenames.flat_map do |name|
       path = dir.join(name)
@@ -18,7 +18,6 @@ class Workspace
         path.relative_path_from(@pathname)
       end
     end
-
   end
 
   def read_file(path)
