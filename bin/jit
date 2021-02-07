@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 require 'pathname'
-require '../workspace'
-require '../blob'
-require '../database'
-require '../entry'
-require '../tree'
-require '../author'
-require '../commit'
-require '../refs'
+require '../lib/workspace'
+require '../lib/database/blob'
+require '../lib/database'
+require '../lib/entry'
+require '../lib/database/tree'
+require '../lib/database/author'
+require '../lib/database/commit'
+require '../lib/refs'
 
 command = ARGV.shift
 
@@ -51,7 +51,7 @@ when 'commit'
   end
 
   root = Tree.build(entries)
-  root.traverse{|tree| database.store(tree)}
+  root.traverse { |tree| database.store(tree) }
 
 =begin
   tree = Tree.new(entries)
