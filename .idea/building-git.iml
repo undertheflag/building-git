@@ -11,6 +11,5 @@
     </content>
     <orderEntry type="jdk" jdkName="ruby-2.7.2-p137" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="irb (v1.2.6, ruby-2.7.2-p137) [gem]" level="application" />
   </component>
 </module>

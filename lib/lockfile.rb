@@ -56,5 +56,4 @@ class Lockfile
       raise StaleLock, "Not holding lock on file: #{@lock_path}"
     end
   end
-
 end
